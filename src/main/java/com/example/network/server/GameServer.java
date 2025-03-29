@@ -13,18 +13,17 @@ public class GameServer {
   public static void start() {
     try(ServerSocket serverSocket = new ServerSocket(PORT)) {
       while (true) {
-        new Thread(() -> {
-          Player newPlayer = new Player(serverSocket);
+        long startTime = System.currentTimeMillis();
+        Player newPlayer = new Player(serverSocket);
 
-          synchronized (waitingPlayers) {
-            waitingPlayers.add(newPlayer);
-          }
-        }).start();
+        synchronized (waitingPlayers) {
+          waitingPlayers.add(newPlayer);
+        }
 
-        new Thread(() -> {
-          Matchmaking matchmaking = new Matchmaking(waitingPlayers);
-          matchmaking.balanceSession();
-        }).start();
+        new Thread(() -> Matchmaking.ping(
+          (Socket) newPlayer.getPlayer(), 
+          (long) startTime)
+        ).start();
       }
     } catch(IOException e) {
       System.out.println(e);
