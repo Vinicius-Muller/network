@@ -5,7 +5,7 @@ This project is a basic online game server built using Java and Spring Boot. The
 ## Features
 
 - **TCP WebSocket Matchmaking**: Allows players to find and join games in real-time.
-- **UDP Gameplay Server** (in progress): To handle real-time player interactions (planned for next weekend).
+- **UDP Gameplay Server** (in progress): To handle real-time player interactions (planned for next time I get bored).
 
 ## Setup
 
